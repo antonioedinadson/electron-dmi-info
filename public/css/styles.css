@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1rem 0;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.content .logo {
+  width: 50%;
+}
+
+.content .logo img {
+  width: 200px;
+}
+
+.content .ns span {
+  color: #969696;
+}
+
+main .list {
+  margin-top: 2rem;
+  text-align: center;
+  color: #969696;
+  
+}
+
+main .list .dmi-item {
+  font-weight: bold;
+}
