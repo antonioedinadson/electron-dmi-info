@@ -6,7 +6,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
     width: 700,
-    height: 400,
+    height: 500,
 
     webPreferences: {
       nodeIntegration: true,
@@ -18,7 +18,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile('index.html')
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -29,69 +29,141 @@ app.whenReady().then(() => {
   })
 });
 
-ipcMain.on('dmi', (event, args) => {
+ipcMain.on('linux', (event, args) => {
 
   switch (args) {
     case 'serialNumber':
-      exec('wmic bios get serialnumber', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-serial-number', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'sk':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-sku-number', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'bp':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s baseboard-product-name', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'sp':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-product-name', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'sf':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-family', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'sv':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-version', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'sm':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-manufacturer', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'bm':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s baseboard-manufacturer', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
       });
       break;
 
     case 'cm':
-      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+      exec('sudo dmidecode -s system-manufacturer', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
+      });
+      break;
+
+    default:
+      return false;
+  }
+});
+
+ipcMain.on('windows', (event, args) => {
+
+  switch (args) {
+    case 'serialNumber':
+      exec('wmic bios get serialnumber', async (err, stdout, stderr) => {
+        if (err !== null) return err;        
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'sk':
+      exec('wmic ComputerSystem get SystemSKUNumber', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'bp':
+      exec('wmic baseboard get Product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'sp':
+      exec('wmic ComputerSystem get Model', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'sf':
+      exec('wmic ComputerSystem get SystemFamily', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'sv':
+      exec('wmic csproduct get version', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'sm':
+      exec('wmic ComputerSystem get Manufacturer', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.sender.
+        stdout.split('\n')[1];
+      });
+      break;
+
+    case 'bm':
+      exec('wmic BaseBoard get Manufacturer', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
+      });
+      break;
+
+    case 'cm':
+      exec('wmic SystemEnclosure get Manufacturer', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout.split('\n')[1];
       });
       break;
 

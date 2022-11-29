@@ -33,6 +33,29 @@ main .list {
   
 }
 
-main .list .dmi-item {
+main .list .dmi {
+  font-size: .8rem;
   font-weight: bold;
+}
+
+.action {
+  width: 100%;
+  display: flex;
+  margin: 3rem 0;
+  justify-content: center;  
+}
+
+.action form {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.action select {
+  width: 300px;
+  padding: .6rem;
+}
+
+.action button {
+  padding: .5rem;
 }
