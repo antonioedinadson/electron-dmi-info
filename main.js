@@ -29,7 +29,7 @@ app.whenReady().then(() => {
   })
 });
 
-ipcMain.on('getDMI', (event, args) => {
+ipcMain.on('dmi', (event, args) => {
 
   switch (args) {
     case 'serialNumber':
@@ -39,8 +39,63 @@ ipcMain.on('getDMI', (event, args) => {
       });
       break;
 
-    default:
+    case 'sk':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
       break;
-  }
 
+    case 'bp':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'sp':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'sf':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'sv':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'sm':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'bm':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    case 'cm':
+      exec('wmic baseboard get product', async (err, stdout, stderr) => {
+        if (err !== null) return err;
+        event.returnValue = stdout;
+      });
+      break;
+
+    default:
+      return false;
+  }
 });
