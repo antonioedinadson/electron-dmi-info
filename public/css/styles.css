@@ -59,3 +59,14 @@ main .list .dmi {
 .action button {
   padding: .5rem;
 }
+
+.action span {
+  text-align: center;
+  color: red;
+  font-size: .8rem;
+  display: none;
+}
+
+.action span.active {
+  display: block;
+}

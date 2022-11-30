@@ -1,5 +1,5 @@
 {
-  "name": "electron-quick-start",
+  "name": "multisoftware-dmi-view",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -14,9 +14,36 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "build": {
+    "appId": "com.my.app",
+    "productName": "MultiSoftware DMI View",
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "snap",
+        "AppImage"
+      ],
+      "icon": "icon.png"
+    }
+  },
+  "author": {
+    "name": "Antonio Edinadson",
+    "email": "antonioedinadson@gmail.com",
+    "url": "https://suasmilhas.com"
+  },
+  "email": "antonio@gmail.com",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^21.2.3"
-  }
+    "electron": "^21.2.3",
+    "electron-builder": "^23.6.0",
+    "g": "^2.0.1"
+  },
+  "dependencies": {}
 }

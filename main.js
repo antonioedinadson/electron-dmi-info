@@ -6,7 +6,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
     width: 700,
-    height: 500,
+    height: 600,
 
     webPreferences: {
       nodeIntegration: true,
@@ -92,78 +92,6 @@ ipcMain.on('linux', (event, args) => {
       exec('sudo dmidecode -s system-manufacturer', async (err, stdout, stderr) => {
         if (err !== null) return err;
         event.returnValue = stdout;
-      });
-      break;
-
-    default:
-      return false;
-  }
-});
-
-ipcMain.on('windows', (event, args) => {
-
-  switch (args) {
-    case 'serialNumber':
-      exec('wmic bios get serialnumber', async (err, stdout, stderr) => {
-        if (err !== null) return err;        
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'sk':
-      exec('wmic ComputerSystem get SystemSKUNumber', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'bp':
-      exec('wmic baseboard get Product', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'sp':
-      exec('wmic ComputerSystem get Model', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'sf':
-      exec('wmic ComputerSystem get SystemFamily', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'sv':
-      exec('wmic csproduct get version', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'sm':
-      exec('wmic ComputerSystem get Manufacturer', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.sender.
-        stdout.split('\n')[1];
-      });
-      break;
-
-    case 'bm':
-      exec('wmic BaseBoard get Manufacturer', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
-      });
-      break;
-
-    case 'cm':
-      exec('wmic SystemEnclosure get Manufacturer', async (err, stdout, stderr) => {
-        if (err !== null) return err;
-        event.returnValue = stdout.split('\n')[1];
       });
       break;
 
